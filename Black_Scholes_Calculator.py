@@ -1,3 +1,15 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+import math
+import scipy.stats as stats
+from scipy.stats import norm
+import streamlit as st
+import yfinance as yf
+import random
+from random import sample
+
 def black_scholes(S, K, T, r, sigma, option_type):
     d1 = (np.log(S / K) + (r + 0.5 * sigma ** 2) * T) / (sigma * np.sqrt(T))
     d2 = d1 - sigma * np.sqrt(T)
