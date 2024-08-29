@@ -69,44 +69,44 @@ option_type = st.selectbox('Option Type', ['call', 'put'])
 
 
 
-    option_price = black_scholes(S, K, T, r, sigma, option_type)
-    delta_val = delta(S, K, T, r, sigma, option_type)
-    gamma_val = gamma(S, K, T, r, sigma)
-    theta_val = theta(S, K, T, r, sigma, option_type)
-    vega_val = vega(S, K, T, r, sigma)
-    rho_val = rho(S, K, T, r, sigma, option_type)
-    mc_price = monte_carlo_option_pricing(S, K, T, r, sigma, option_type)
+option_price = black_scholes(S, K, T, r, sigma, option_type)
+delta_val = delta(S, K, T, r, sigma, option_type)
+gamma_val = gamma(S, K, T, r, sigma)
+theta_val = theta(S, K, T, r, sigma, option_type)
+vega_val = vega(S, K, T, r, sigma)
+rho_val = rho(S, K, T, r, sigma, option_type)
+mc_price = monte_carlo_option_pricing(S, K, T, r, sigma, option_type)
 
     #Outputs
-    st.write(f'Monte Carlo Estimated Option Price: {mc_price:.2f}')
-    st.write(f'The price of the {option_type} option is {option_price:.2f}')
-    st.write(f'Delta: {delta_val:.4f}')
-    st.write(f'Gamma: {gamma_val:.4f}')
-    st.write(f'Theta (per day): {theta_val:.4f}')
-    st.write(f'Vega (per % volatility): {vega_val:.4f}')
-    st.write(f'Rho (per % rate): {rho_val:.4f}')
+st.write(f'Monte Carlo Estimated Option Price: {mc_price:.2f}')
+st.write(f'The price of the {option_type} option is {option_price:.2f}')
+st.write(f'Delta: {delta_val:.4f}')
+st.write(f'Gamma: {gamma_val:.4f}')
+st.write(f'Theta (per day): {theta_val:.4f}')
+st.write(f'Vega (per % volatility): {vega_val:.4f}')
+st.write(f'Rho (per % rate): {rho_val:.4f}')
 
-    x = np.linspace(0.01, 10, 100)
-    y = [black_scholes(S, K, t, r, sigma, option_type) for t in x]
+x = np.linspace(0.01, 10, 100)
+y = [black_scholes(S, K, t, r, sigma, option_type) for t in x]
 
-    # Plot the graph
-    fig, ax = plt.subplots()
-    ax.plot(x, y, label=f'{option_type.capitalize()} Option Price')
-    ax.set_xlabel('Time to Maturity')
-    ax.set_ylabel('Option Price')
-    ax.legend()
+# Plot the graph
+fig, ax = plt.subplots()
+ax.plot(x, y, label=f'{option_type.capitalize()} Option Price')
+ax.set_xlabel('Time to Maturity')
+ax.set_ylabel('Option Price')
+ax.legend()
 
 
-    #Plotting the Delta and Gamma
-    time_range = np.linspace(0.01, T, 100)
-    delta_vals = [delta(S, K, t, r, sigma, option_type) for t in time_range]
-    gamma_vals = [gamma(S, K, t, r, sigma) for t in time_range]
+#Plotting the Delta and Gamma
+time_range = np.linspace(0.01, T, 100)
+delta_vals = [delta(S, K, t, r, sigma, option_type) for t in time_range]
+gamma_vals = [gamma(S, K, t, r, sigma) for t in time_range]
 
-    fig, ax = plt.subplots()
-    ax.plot(time_range, delta_vals, label='Delta')
-    ax.plot(time_range, gamma_vals, label='Gamma')
-    ax.set_xlabel('Time to Maturity')
-    ax.set_ylabel('Value')
-    ax.legend()
-    # Display the graph in Streamlit
-    st.pyplot(fig)
+fig, ax = plt.subplots()
+ax.plot(time_range, delta_vals, label='Delta')
+ax.plot(time_range, gamma_vals, label='Gamma')
+ax.set_xlabel('Time to Maturity')
+ax.set_ylabel('Value')
+ax.legend()
+# Display the graph in Streamlit
+st.pyplot(fig)
